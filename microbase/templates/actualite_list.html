@@ -1,0 +1,16 @@
+{% include 'include/header.html' %}
+    <main>
+        <h1>Liste des Actualités</h1>
+        <ul>
+            {% for actualite in actualites %}
+                <li>
+                    <h2>{{ actualite.title }}</h2>
+                    <p>{{ actualite.content }}</p>
+                    <!-- Ajoutez d'autres détails de l'actualité si nécessaire -->
+                </li>
+            {% empty %}
+                <p>Aucune actualité disponible.</p>
+            {% endfor %}
+        </ul>
+    </main>
+{% include 'include/footer.html' %}

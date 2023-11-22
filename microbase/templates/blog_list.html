@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Blog</title>
+{% endblock %}
+
+{% block content %}
+<main>
+    <h1>Liste des Articles de Blog</h1>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.content }}</p>
+                <!-- Ajoutez d'autres détails de l'article si nécessaire -->
+            </li>
+        {% empty %}
+            <p>Aucun article de blog disponible.</p>
+        {% endfor %}
+    </ul>
+</main>
+{% endblock %}
+

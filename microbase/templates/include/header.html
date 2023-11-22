@@ -1,0 +1,29 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <a href="/">VotreLogo</a>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/recherches/">Recherches</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/actualites/">Actualité</a></li>
+                <!-- Ajoutez d'autres liens de navigation si nécessaire -->
+            </ul>
+        </nav>
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <a href="/profil/">Profil</a>
+                <a href="{% url 'logout' %}">Se déconnecter</a>
+
+            {% else %}
+                <a href="/login/">Connexion</a>
+            {% endif %}
+        </div>
+    </div>
+  
+</header>

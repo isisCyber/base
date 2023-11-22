@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    {% block title %}
+        <title>Votre titre par défaut</title>
+    {% endblock %}
+</head>
+<body>
+    {% include 'include/header.html' %}
+
+    {% block content %}
+        <!-- Contenu spécifique à chaque page -->
+    {% endblock %}
+
+    {% include 'include/footer.html' %}
+    
+    <!-- Scripts JavaScript -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <!-- Fin du document -->
+    {% include 'include/end.html' %}

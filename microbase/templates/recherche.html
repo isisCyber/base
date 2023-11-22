@@ -1,0 +1,18 @@
+{% include 'include/header.html' %}
+    <!-- Votre contenu spécifique à la page de recherche -->
+    <h2>Résultats de la recherche</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Rechercher</button>
+    </form>
+    <!-- Afficher les résultats de la recherche -->
+    <div class="resultats">
+        <!-- Boucle pour afficher les résultats -->
+        {% for resultat in resultats %}
+            <p>{{ resultat }}</p>
+        {% empty %}
+            <p>Aucun résultat trouvé.</p>
+        {% endfor %}
+    </div>
+{% include 'include/footer.html' %}

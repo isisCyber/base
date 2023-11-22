@@ -1,0 +1,63 @@
+/* Reset des marges et paddings */
+body, h1, h2, h3, h4, h5, h6, ul, li, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style pour le header */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.auth-links a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* Style pour les liens de navigation actifs */
+nav ul li a.active {
+    font-weight: bold;
+    /* Ajoutez d'autres styles pour les liens actifs si nécessaire */
+}
+
+/* Style pour le logo */
+.logo a {
+    display: inline-block; /* Pour que la largeur et la hauteur s'appliquent */
+}
+
+.logo img {
+    width: 15px;
+}
+
