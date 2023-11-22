@@ -4,8 +4,8 @@ from .forms import RechercheForm
 from django.views.generic import ListView
 from django.contrib.auth import  authenticate, login
 from .models import Article
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -72,7 +72,6 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-
+@login_required
 def profile(request):
-    # Logique de la vue de profil
-    return render(request, 'profile.html')  # Remplacez 'profile.html' par votre modèle de profil
+    return render(request, 'profile.html')
