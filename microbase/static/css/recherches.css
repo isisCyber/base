@@ -1,0 +1,28 @@
+/* Exemple de styles CSS pour la mise en page des résultats */
+
+.search-results {
+    margin-top: 20px;
+}
+
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+}
+
+.user-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-card strong {
+    font-size: 1.2em;
+}
+
+.user-card p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}

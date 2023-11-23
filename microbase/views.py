@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import RechercheForm
+import json
 from django.views.generic import ListView
 from django.contrib.auth import  authenticate, login
-from .models import Article
+from .models import Article, AuditLog
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 
@@ -14,9 +15,11 @@ def moderate_content(request):
     # Votre logique pour la modération du contenu ici
     pass
 
+
 def index(request):
     # Votre logique pour récupérer les données ou effectuer d'autres opérations pour la page d'index
     return render(request, 'index.html')
+
 
 def recherche(request):
     
@@ -56,6 +59,7 @@ class BlogListView(ListView):
     context_object_name = 'articles'  # Nom du contexte pour les articles de blog
     queryset = Article.objects.filter(type='blog')  # Filtrer les articles de type 'blog'
 
+
 class ActualiteListView(ListView):
     model = Article
     template_name = 'actualite_list.html'  # Nom du template pour afficher la liste des actualités
@@ -80,3 +84,26 @@ def login_view(request):
 @login_required
 def profile(request):
     return render(request, 'profile.html')
+
+
+def create_or_update_object(request, obj):
+    if obj.pk:  # Si l'objet existe déjà (mise à jour)
+        action = f'Modification de {obj.__class__.__name__} {obj.pk}'
+    else:  # Si l'objet est nouvellement créé
+        action = f'Création de {obj.__class__.__name__} {obj.pk}'
+
+    # Enregistrement de l'action dans les logs
+    AuditLog.objects.create(user=request.user, action=action, content_object=obj)
+
+
+
+def recherches_view(request):
+    if 'query' in request.GET:
+        query = request.GET['query']
+        with open('users.json') as f:
+            data = json.load(f)
+            # Recherche dans le fichier JSON en fonction du terme saisi par l'utilisateur
+            results = [user for user in data if query.lower() in user['username'].lower()]
+
+        return render(request, 'recherche.html', {'results': results, 'query': query})
+    return render(request, 'recherche.html')

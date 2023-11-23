@@ -1,18 +1,32 @@
-{% include 'include/header.html' %}
-    <!-- Votre contenu spécifique à la page de recherche -->
-    <h2>Résultats de la recherche</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/recherches.css' %}">
+{% endblock %}
+{% block content %}
+    <h1>Page de Recherches</h1>
+    <form method="GET">
+        <input type="text" name="query" value="{{ query }}" placeholder="Rechercher par username">
         <button type="submit">Rechercher</button>
     </form>
-    <!-- Afficher les résultats de la recherche -->
-    <div class="resultats">
-        <!-- Boucle pour afficher les résultats -->
-        {% for resultat in resultats %}
-            <p>{{ resultat }}</p>
-        {% empty %}
-            <p>Aucun résultat trouvé.</p>
-        {% endfor %}
+    
+    <div class="search-results">
+        {% if results %}
+            <h2>Résultats pour "{{ query }}" :</h2>
+            <div class="results-container">
+                {% for user in results %}
+                    <div class="user-card">
+                        <strong>{{ user.username }}</strong>
+                        <p>Nom complet : {{ user.first_name }} {{ user.last_name }}</p>
+                        <p>Catégorie : {{ user.category }}</p>
+                        <!-- N'affichez pas le mot de passe directement pour des raisons de sécurité -->
+                        <!-- Vous pouvez décider de ne pas l'afficher du tout ou de l'afficher d'une manière sécurisée -->
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Aucun résultat pour "{{ query }}"</p>
+        {% endif %}
     </div>
-{% include 'include/footer.html' %}
+{% endblock %}

@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    <title>Profil detail page</title>
+{% endblock %}
 {% block content %}
-    <h1>Votre Profil</h1>
+    
     <!-- Contenu de la page de profil -->
     <p>Nom d'utilisateur : {{ user.username }}</p>
+    <p>Niveau d'accès : {{ user.user_level }}</p>
     <!-- Ajoutez d'autres informations de profil si nécessaire -->
 {% endblock %}
