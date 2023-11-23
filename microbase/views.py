@@ -4,10 +4,15 @@ from .forms import RechercheForm
 from django.views.generic import ListView
 from django.contrib.auth import  authenticate, login
 from .models import Article
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 
+@login_required
+@user_passes_test(lambda u: u.user_level == 'Modérateur', login_url='/access-denied/')
+def moderate_content(request):
+    # Votre logique pour la modération du contenu ici
+    pass
 
 def index(request):
     # Votre logique pour récupérer les données ou effectuer d'autres opérations pour la page d'index
